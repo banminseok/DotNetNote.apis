@@ -18,7 +18,7 @@ namespace DotNetNote.Apis.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "안녕!", "반가워" };
+            return new string[] { "안녕!", "반가워" };            
         }
 
         // 라우트 변수
@@ -33,6 +33,8 @@ namespace DotNetNote.Apis.Controllers
 
         // POST api/<ApiHelloWorldController>
         [HttpPost]
+        //public void Post([FromBody] string value)
+        //[FromBody] Request 본문으로 받기
         public void Post([FromBody] string value)
         {
         }

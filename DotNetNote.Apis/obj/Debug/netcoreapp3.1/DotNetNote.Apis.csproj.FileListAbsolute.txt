@@ -90,3 +90,7 @@ D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Ap
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.dll
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.pdb
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.genruntimeconfig.cache
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll

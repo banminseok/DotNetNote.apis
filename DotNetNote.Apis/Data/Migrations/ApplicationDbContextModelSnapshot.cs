@@ -92,8 +92,8 @@ namespace DotNetNote.Apis.Data.Migrations
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LockoutEnd")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
