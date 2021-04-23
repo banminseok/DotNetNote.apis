@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "MyRankingServiceTest Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p></p>
+
+    <div id="korScore"></div>
+    <div id="engScore"></div>
+    <div id="totalScore"></div>
+    <hr/>
+    <ul id="lstStudents">
+    </ul>
+</div>
+
+@section Scripts {
+<script>
+    $(function(){
+        var API_URL = "/api/MyRankingService";
+        $.getJSON(API_URL, function (json) {
+            console.log(json);
+            $("#korScore").text(json.subject.kor);
+            $("#engScore").text(json.subject.eng);
+            $("#totalScore").text(json.subject.total);
+
+            $.each(json.students, function (key, val) {
+                $("<li/>", { html: key + ":" +  val.id + "," + val.name + "," + val.score }).appendTo('#lstStudents');
+            });
+        });
+    });
+</script>
+}
