@@ -1,3 +1,4 @@
+using DotNetNote.Apis.Controllers;
 using DotNetNote.Apis.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,6 +42,10 @@ namespace DotNetNote.Apis
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Api", Version = "v1" });
             });
+
+            //services.AddTransient<IPointRepository, PointRepository>();     //DB
+            services.AddTransient<IPointRepository, PointRepositoryInMemory>();   //인메모리
+            services.AddTransient<IPointLogRepository, PointLogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

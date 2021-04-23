@@ -95,3 +95,5 @@ D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.A
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\MyRankingServiceTest\Index.cshtml.g.cs
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\PointLog\Index.cshtml.g.cs
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\Point\Index.cshtml.g.cs
