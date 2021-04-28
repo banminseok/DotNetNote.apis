@@ -61,5 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\table\Points_PointLogs.sql" />
+    <Build Include="dbo\table\Fives.sql" />
   </ItemGroup>
 </Project>

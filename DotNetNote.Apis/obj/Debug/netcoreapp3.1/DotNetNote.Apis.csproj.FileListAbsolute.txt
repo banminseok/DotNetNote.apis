@@ -60,7 +60,6 @@ D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\runtimes\win-
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.csprojAssemblyReference.cache
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.AssemblyInfoInputs.cache
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.AssemblyInfo.cs
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.csproj.CoreCompileInputs.cache
@@ -97,3 +96,5 @@ D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Swashbuckle.A
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\MyRankingServiceTest\Index.cshtml.g.cs
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\PointLog\Index.cshtml.g.cs
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\Point\Index.cshtml.g.cs
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Dapper.dll
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.csprojAssemblyReference.cache

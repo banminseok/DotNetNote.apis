@@ -1,5 +1,6 @@
 using DotNetNote.Apis.Controllers;
 using DotNetNote.Apis.Data;
+using DotNetNote.Apis.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -46,6 +47,7 @@ namespace DotNetNote.Apis
             //services.AddTransient<IPointRepository, PointRepository>();     //DB
             services.AddTransient<IPointRepository, PointRepositoryInMemory>();   //인메모리
             services.AddTransient<IPointLogRepository, PointLogRepository>();
+            services.AddSingleton<IFiveRepository>(new FiveRepository(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
