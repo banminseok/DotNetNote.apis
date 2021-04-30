@@ -71,10 +71,15 @@ namespace DotNetNote.Apis.Models
         {
             throw new System.NotImplementedException();
         }
-
+        /// <summary>
+        /// 상세보기
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public FiveViewModel GetById(int id)
         {
-            throw new System.NotImplementedException();
+            string sql = "Select * From Fives Where Id=@Id";
+            return _db.Query<FiveViewModel>(sql, new { Id = id }).SingleOrDefault();
         }
 
         public void Remove(int id)

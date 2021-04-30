@@ -6,7 +6,7 @@
     <Name>DotNetNote.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{30cf626b-6a8e-4b0c-b770-8497d82f22d1}</ProjectGuid>
+    <ProjectGuid>{88155dcc-e27b-4e21-83c6-c7100a44b562}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -56,11 +56,12 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo" />
-    <Folder Include="dbo\table" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\table\Points_PointLogs.sql" />
-    <Build Include="dbo\table\Fives.sql" />
+    <Build Include="Fives.sql" />
+    <Build Include="Fives_Job.sql" />
+    <Build Include="Points_PointLogs.sql" />
+    <Build Include="SQLQuery1.sql" />
+    <Build Include="SQLQuery3.sql" />
   </ItemGroup>
 </Project>

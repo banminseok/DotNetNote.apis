@@ -34,6 +34,30 @@ namespace DotNetNote.Apis.Controllers
             }
         }
 
+        [HttpGet("{id:int}", Name="GetById")]   // 이름추가 (post에서 호출)
+        public IActionResult Get(int id)
+        {
+            ////https://localhost:44367/api/FiveService/1111
+            try
+            {
+                FiveViewModel model = _repository.GetById(id);
+                if (model == null)
+                {
+                    return NotFound($"아무런 데이터가 없습니다.");
+                }
+                return Ok(model);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        /// <summary>
+        /// 공식화된 Post 코드
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Produces("application/json", Type = typeof(FiveViewModel))]
         [Consumes("application/json")]  // application/xml
@@ -57,11 +81,11 @@ namespace DotNetNote.Apis.Controllers
                 {
                     // GetById 액션 이름 사용해서 입력된 데이터 반환 
                     //return CreatedAtAction("GetById", new { id = m.Id }, m);
-                    return CreatedAtRoute("GetFiveById", new { id = m.Id }, m); // Status: 201 Created
+                    return CreatedAtRoute("GetById", new { id = m.Id }, m); // Status: 201 Created
                 }
                 else
                 {
-                    var uri = Url.Link("GetFiveById", new { id = m.Id });
+                    var uri = Url.Link("GetById", new { id = m.Id });
                     return Created(uri, m); // 201 Created
                 }
                 //return Ok(m); //200
