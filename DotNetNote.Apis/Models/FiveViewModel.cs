@@ -27,6 +27,7 @@ namespace DotNetNote.Apis.Models
         void Remove(int id);
 
         List<FiveViewModel> GetAllWithPaging(int pageIndex, int pageSize =10);
+        int GetRecordCount();
     }
 
     /// <summary>
@@ -69,8 +70,30 @@ namespace DotNetNote.Apis.Models
 
         public List<FiveViewModel> GetAllWithPaging(int pageIndex, int pageSize = 10)
         {
-            throw new System.NotImplementedException();
+            string sql = @"
+                Select Id, Note 
+                From (
+                    Select Row_Number() Over (Order By Id Desc) As RowNumber, Id, Note
+                    From Fives                    
+                ) As TempRowTables
+                Where 
+                    RowNumber Between 
+                        (@PageIndex * @PageSize +1)
+                    And
+                        (@PageIndex + ) * @PageSize
+                Order By Id Desc
+            ";
+            sql = @"
+                Select Row_Number() Over (Order By Id Desc) As RowNumber, Id, Note 
+                From Fives
+                Order By Id Desc
+                offset (@PageIndex)*@PageSize rows
+                fetch next @PageSize rows only  
+               
+            ";
+            return _db.Query<FiveViewModel>(sql, new { pageIndex = pageIndex, pageSize=pageSize}).ToList();
         }
+
         /// <summary>
         /// 상세보기
         /// </summary>
@@ -82,14 +105,41 @@ namespace DotNetNote.Apis.Models
             return _db.Query<FiveViewModel>(sql, new { Id = id }).SingleOrDefault();
         }
 
-        public void Remove(int id)
+        /// <summary>
+        /// 레코드 카운트
+        /// </summary>
+        /// <returns></returns>
+        public int GetRecordCount()
         {
-            throw new System.NotImplementedException();
+            string sql = @"Select Count(*) From Fives";
+            return _db.Query<int>(sql).FirstOrDefault();
         }
 
+        /// <summary>
+        /// 삭제...
+        /// </summary>
+        /// <param name="id"></param>
+        public void Remove(int id)
+        {
+            var sql = @"
+                Delete From Fives Where Id=@Id
+            ";
+            _db.Execute(sql, new { Id = id });
+        }
+
+        /// <summary>
+        /// 수정
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public FiveViewModel Update(FiveViewModel model)
         {
-            throw new System.NotImplementedException();
+            var sql = @"Update Fives 
+                        Set Note= @Note
+                        Where Id = @Id
+            ";
+            _db.Execute(sql, model);
+            return model;
         }
     }
 }

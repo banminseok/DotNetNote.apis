@@ -95,5 +95,72 @@ namespace DotNetNote.Apis.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPut("{id:int}")]   //HttpPatch=== 부분 업데이트
+        public IActionResult Put(int id, [FromBody] FiveViewModel model) 
+        {
+            if (model==null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var oldModel = _repository.GetById(id);
+                if(oldModel ==null)
+                {
+                    return NotFound($"{id}번 데이터가 없습니다.");
+                }
+                model.Id = id;
+                _repository.Update(model);
+                //return Ok(model);
+                return NoContent(); //204 No Content  이미 던져준 정보에 모든 값을 가지고 있어서 ...
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("데이터가 업데이트 되지 않았습니다."); 
+            }
+        }
+
+        [HttpDelete("{id:int}")]  //데코레이터 특성
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var oldModel = _repository.GetById(id);
+                if (oldModel == null)
+                {
+                    return NotFound($"{id}번 데이터가 없습니다.");
+                }
+                _repository.Remove(id);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return BadRequest("데이터가 삭제 되지 않았습니다.");
+                //NotFound
+            }
+        }
+
+        [HttpGet("page/{pageNumber:int}/{pageSize:int}")]  // 이름추가 
+        public IActionResult Get(int pageNumber=1, int pageSize = 10)
+        {
+            try
+            {
+                var fives = _repository.GetAllWithPaging(pageNumber-1, pageSize);
+                if(fives == null)
+                {
+                    return NotFound($"아무런 데이터가 없습니다.");
+                }
+
+                //응답 헤더에 총 레코드 수를 담아서 출력
+                Response.Headers.Add("X-TotalRecordCount", _repository.GetRecordCount().ToString());
+                return Ok(fives); //200
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
