@@ -48,6 +48,20 @@ namespace DotNetNote.Apis
             services.AddTransient<IPointRepository, PointRepositoryInMemory>();   //인메모리
             services.AddTransient<IPointLogRepository, PointLogRepository>();
             services.AddSingleton<IFiveRepository>(new FiveRepository(Configuration.GetConnectionString("DefaultConnection")));
+            
+
+            //[DI] 의존성 주입(Dependency Injection)
+            DependencyInjectionContainer(services);
+        }
+
+        /// <summary>
+        /// 의존성 주입 관련 코드만 따로 모아서 관리
+        /// - 리포지토리 등록
+        /// </summary>
+        private void DependencyInjectionContainer(IServiceCollection services)
+        {
+            // Exams: Questions, ... 
+            services.AddSingleton<IQuestionRepository, QuestionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

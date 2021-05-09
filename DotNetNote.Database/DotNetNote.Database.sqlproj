@@ -63,5 +63,6 @@
     <Build Include="Points_PointLogs.sql" />
     <Build Include="SQLQuery1.sql" />
     <Build Include="SQLQuery3.sql" />
+    <Build Include="Questions_Job.sql" />
   </ItemGroup>
 </Project>
