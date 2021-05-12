@@ -200,5 +200,153 @@ namespace DotNetNote.Apis.Models
                 return BadRequest();
             }
         }
+
+        // GET: /api/QuestionService/{id} 
+        [HttpGet("{id:int}", Name = "GetQuestionById")] // 이름 추가
+        [ProducesResponseType(typeof(Question), 200)]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var model = _repository.GetById(id);
+                if (model == null)
+                {
+                    return NotFound($"{id}번 데이터가 없습니다.");
+                }
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"에러가 발생했습니다. {ex.Message}");
+            }
+        }
+
+        [HttpPost]
+        [Produces("application/json", Type = typeof(QuestionDto))]
+        [Consumes("application/json")] // application/xml
+        public IActionResult Post([FromBody] QuestionDto model) // Deserialize, 생성 전용 DTO 클래스 사용 가능 
+        {
+            // 예외 처리 방법
+            if (model == null)
+            {
+                return BadRequest(); // Status: 400 Bad Request 
+            }
+
+            try
+            {
+                // 예외 처리 
+                if (model.Title == null || model.Title.Length < 1)
+                {
+                    ModelState.AddModelError("Title", "문제를 입력해야 합니다.");
+                }
+
+                // 모델 유효성 검사
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState); // 400 에러 출력
+                }
+
+                // QuestionDto를 Question 모델로 변경해서 리포지토리에 전달
+                // AutoMapper Mapper.Map() 형식으로 대체 가능 
+                var newModel = new Question { Id = model.Id, Title = model.Title };
+
+                var m = _repository.Add(newModel); // 저장
+
+                if (DateTime.Now.Second % 2 == 0) //[!] 둘 중 원하는 방식 사용
+                {
+                    //return CreatedAtAction("GetById", new { id = m.Id }, m);
+                    return CreatedAtRoute("GetQuestionById", new { id = m.Id }, m); // Status: 201 Created
+                }
+                else
+                {
+                    var uri = Url.Link("GetQuestionById", new { id = m.Id });
+                    return Created(uri, m); // 201 Created
+                }
+                //return Ok(m); // 200
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        } // </Post>
+
+        // PUT: /api/QuestionService
+        [HttpPut("{id:int}")] // HttpPatch == 부분 업데이트 
+        public IActionResult Put(int id, [FromBody] Question model)
+        {
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var oldModel = _repository.GetById(id);
+                if (oldModel == null)
+                {
+                    return NotFound($"{id}번 데이터가 없습니다.");
+                }
+                model.Id = id; // * 
+                _repository.Update(model);
+                //return Ok(model);
+                // 204 No Content
+                return NoContent(); // 이미 넘어온 정보에 모든 값을 가지고 있기에...
+            }
+            catch (Exception)
+            {
+                return BadRequest("데이터가 업데이트되지 않았습니다.");
+            }
+        }
+
+        // DELETE: /api/QuestionService/{id} 
+        [HttpDelete("{id:int}")] // 데코레이터 특성
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var oldModel = _repository.GetById(id);
+                if (oldModel == null)
+                {
+                    return NotFound($"{id}번 데이터가 없습니다.");
+                }
+
+                // 삭제
+                _repository.Remove(id);
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return BadRequest("삭제할 수 없습니다.");
+            }
+        }
+
+
+        // 페이징 처리 Web API 
+        // GET: /api/QuestionService/page/1/1
+        [HttpGet("page/{pageNumber:int}/{pageSize:int}")] // 이름 추가
+        [ProducesResponseType(typeof(IEnumerable<Question>), 200)]
+        public IActionResult Get(int pageNumber = 1, int pageSize = 10)
+        {
+            try
+            {
+                // 페이지 번호는 1, 2, 3 사용, 리포지토리에서는 0, 1, 2 사용
+                pageNumber = (pageNumber > 0) ? pageNumber - 1 : 0;
+                var models = _repository.GetAllWithPaging(pageNumber, pageSize);
+                if (models == null)
+                {
+                    return NotFound($"아무런 데이터가 없습니다.");
+                }
+
+                // 응답 헤더에 총 레코드 수를 담아서 출력
+                Response.Headers.Add(
+                    "X-TotalRecordCount", _repository.GetRecordCount().ToString());
+
+                return Ok(models); // 200 
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
