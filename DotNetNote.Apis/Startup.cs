@@ -79,7 +79,7 @@ namespace DotNetNote.Apis
                 app.UseHsts();
             }
             //[!] CORS
-            //외부 URL API 접속설정
+            //외부 URL API 접속설정 (API 서비스의 Startup.cs 에서 접속하는 url 허용)
             //app.UseCors(options => options.WithOrigins("apiUrl"));
             app.UseCors(options => options.WithOrigins("http://dotnetnote/...."));
             app.UseCors(options => options.AllowAnyOrigin().WithMethods("GET"));

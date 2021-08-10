@@ -18,13 +18,13 @@ namespace DotNetNote.Apis.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "안녕!", "반가워" };            
+            return new string[] { "안녕하세요.", "반갑습니다." };            
         }
 
-        // 라우트 변수
+        // 라우트 매개변수
         // GET api/<ApiHelloWorldController>/5
-        //1[HttpGet("{id}")]
-        //[!]모델 바인딩 + 인라인 제약 조건 (:)
+        //  [HttpGet("{id}")]
+        //[!]모델 바인딩 + 인라인 제약 조건 (:)  ===> 해당localhost 페이지를 찾을 수 없습니다
         [HttpGet("{id:int}")]
         public string Get(int id)
         {

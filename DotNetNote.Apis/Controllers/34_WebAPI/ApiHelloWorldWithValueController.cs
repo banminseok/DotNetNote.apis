@@ -19,10 +19,11 @@ namespace DotNetNote.Apis.Controllers
         [HttpGet]
         public IEnumerable<Value> Get()
         {
+            //return new string[] { "test", "test2" };
             return new Value[] {
                 new Value { Id = 1, Text = "안녕하세요" },
                 new Value { Id = 2, Text = "반값습니다." },
-                new Value { Id = 3, Text = "어서옷게요" },
+                new Value { Id = 3, Text = "어서오세요" },
                 new Value { Id = 4, Text = "고맙습니다." },
             };
         }
@@ -59,7 +60,7 @@ namespace DotNetNote.Apis.Controllers
         [HttpPost]
         //[FromBody] Request 본문으로 받는다
         [Produces("application/json", Type = typeof(Value))]
-        [Consumes("application/json")]
+        [Consumes("application/json")]  //응답은 Json 으로.
         public IActionResult Post([FromBody] Value value)
         {
             // 모델 유효성 검사
@@ -77,9 +78,12 @@ namespace DotNetNote.Apis.Controllers
         }
     
     }
+
+    // 포맷터 : JSON, XML
     public class Value
     {
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Text 속성은 필수입력 값입니다.")]
         [MinLength(5)]
         public string Text { get; set; }
