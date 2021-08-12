@@ -30,7 +30,7 @@ namespace DotNetNote.Apis.Controllers
         //}
 
 
-        //[3] 복합형식으로 전달
+        //[3] 복합형식(complex Type : 하나 이상의 다른 개체를 포함) 으로 전달
         [HttpGet]
         public MyRankingDto Get()
         {

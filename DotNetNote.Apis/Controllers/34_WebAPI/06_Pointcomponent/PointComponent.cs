@@ -63,10 +63,14 @@ namespace DotNetNote.Apis.Controllers
 
         public int GetTotalPointByUserId(int userId = 1234)
         {
+            //ToDo : 실제 데이터 베이스 연동.
             return 1234;
         }
     }
 
+    /// <summary>
+    /// Demo 용
+    /// </summary>
     public class PointRepositoryInMemory : IPointRepository
     {
         public PointStatus GetPointStatusByUser()
@@ -76,7 +80,7 @@ namespace DotNetNote.Apis.Controllers
 
         public int GetTotalPointByUserId(int userId = 1234)
         {
-            return 1234;
+            return 1204;
         }
     }
 
@@ -155,6 +159,9 @@ namespace DotNetNote.Apis.Controllers
         }
     }
 
+    /// <summary>
+    /// 포인트 상태 정보를 반환.
+    /// </summary>
     [Route("api/[controller]")]
     public class PointStatusController : Controller
     {
