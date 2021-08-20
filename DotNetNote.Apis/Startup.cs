@@ -48,10 +48,11 @@ namespace DotNetNote.Apis
             services.AddTransient<IPointRepository, PointRepositoryInMemory>();   //인메모리
             services.AddTransient<IPointLogRepository, PointLogRepository>();
             services.AddSingleton<IFiveRepository>(new FiveRepository(Configuration.GetConnectionString("DefaultConnection")));
-            
+
 
             //[DI] 의존성 주입(Dependency Injection)
-            DependencyInjectionContainer(services);
+            //services.AddSingleton<IQuestionRepository, QuestionRepository>();
+            DependencyInjectionContainer(services); 
         }
 
         /// <summary>

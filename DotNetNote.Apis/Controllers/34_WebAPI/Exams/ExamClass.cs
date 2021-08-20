@@ -52,7 +52,7 @@ namespace DotNetNote.Apis.Models
         private IConfiguration _config;
         private IDbConnection _db;
 
-
+        
         public QuestionRepository(IConfiguration config)
         {
             _config = config;
@@ -166,7 +166,7 @@ namespace DotNetNote.Apis.Models
     /// WebAPI 컨트롤러 클래스
     /// 컨벤션 기반 라우팅 대신에 어튜리뷰트 라우팅 추천
     /// </summary>
-    //[Route("api/questions")]
+    //[Route("api/questions")] // 직겁 Web API 이름을 지정할 때
     [Route("api/[controller]")] //api/QuestionService
     public class QuestionServiceController : Controller
     {

@@ -8,24 +8,32 @@ using System.Linq;
 namespace DotNetNote.Apis.Models
 {
     /// <summary>
-    /// 모델 클래서 Fives Table 매칭
+    /// 모델 클래스 Fives Table 매칭
     /// </summary>
     public class FiveViewModel
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required] //Not Null
         public string Note { get; set; }
     }
 
+    /// <summary>
+    /// 인터페이스
+    /// </summary>
     public interface IFiveRepository
     {
+        //입력
         FiveViewModel Add(FiveViewModel model);
+        //출력
         List<FiveViewModel> GetAll();
         FiveViewModel GetById(int id);
+        //수정
         FiveViewModel Update(FiveViewModel model);
+        //삭제
         void Remove(int id);
 
+        // 페이징 처리 
         List<FiveViewModel> GetAllWithPaging(int pageIndex, int pageSize =10);
         int GetRecordCount();
     }
@@ -39,14 +47,14 @@ namespace DotNetNote.Apis.Models
 
         public FiveRepository(string connectionString)
         {
-            _db = new SqlConnection(connectionString);
+            _db = new SqlConnection(connectionString); //Microsoft.Data.SqlClient
         }
 
         /// <summary>
         /// 입력 메서드
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        /// <param name="model">FiveViewModel</param>
+        /// <returns>FiveViewModel</returns>
         public FiveViewModel Add(FiveViewModel model)
         {
             string sql = @"
@@ -97,12 +105,11 @@ namespace DotNetNote.Apis.Models
         /// <summary>
         /// 상세보기
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
         public FiveViewModel GetById(int id)
         {
             string sql = "Select * From Fives Where Id=@Id";
-            return _db.Query<FiveViewModel>(sql, new { Id = id }).SingleOrDefault();
+            return _db.Query<FiveViewModel>(sql, new { Id = id }).SingleOrDefault();  //.Single()
         }
 
         /// <summary>
@@ -118,7 +125,6 @@ namespace DotNetNote.Apis.Models
         /// <summary>
         /// 삭제...
         /// </summary>
-        /// <param name="id"></param>
         public void Remove(int id)
         {
             var sql = @"
@@ -130,8 +136,6 @@ namespace DotNetNote.Apis.Models
         /// <summary>
         /// 수정
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         public FiveViewModel Update(FiveViewModel model)
         {
             var sql = @"Update Fives 

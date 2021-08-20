@@ -98,3 +98,4 @@ D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\P
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\Point\Index.cshtml.g.cs
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\bin\Debug\netcoreapp3.1\Dapper.dll
 D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\DotNetNote.Apis.csprojAssemblyReference.cache
+D:\VsTest2\DotNetNote.apis\DotNetNote.Apis\obj\Debug\netcoreapp3.1\Razor\Views\WebApiFileUploadDemo\Index.cshtml.g.cs

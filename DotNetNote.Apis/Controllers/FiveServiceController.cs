@@ -17,6 +17,8 @@ namespace DotNetNote.Apis.Controllers
         {
             _repository = repository;
         }
+
+        [HttpGet]
         public IActionResult Get()
         {
             try
@@ -34,16 +36,17 @@ namespace DotNetNote.Apis.Controllers
             }
         }
 
-        [HttpGet("{id:int}", Name="GetById")]   // 이름추가 (post에서 호출)
+        [HttpGet("{id:int}", Name="GetById")]   // GetById Web API 이름추가 (post에서 (GetById로) 호출 가능)
         public IActionResult Get(int id)
         {
             ////https://localhost:44367/api/FiveService/1111
+            ////https://localhost:44367/api/GetById
             try
             {
                 FiveViewModel model = _repository.GetById(id);
                 if (model == null)
                 {
-                    return NotFound($"아무런 데이터가 없습니다.");
+                    return NotFound($"아무런 데이터가 없습니다. ({id}번)");
                 }
                 return Ok(model);
             }
@@ -59,8 +62,8 @@ namespace DotNetNote.Apis.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        [Produces("application/json", Type = typeof(FiveViewModel))]
-        [Consumes("application/json")]  // application/xml
+        [Produces("application/json", Type = typeof(FiveViewModel))] // 받는 인자 정의
+        [Consumes("application/json")]  // application/xml   // 출력 포멧 정의
         public IActionResult Post([FromBody] FiveViewModel model)
         {
             try
@@ -72,7 +75,7 @@ namespace DotNetNote.Apis.Controllers
                 //모델 유효성 검사
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    return BadRequest(ModelState);  // 400 에러 출력.
                 }
 
                 var m = _repository.Add(model);
@@ -80,7 +83,7 @@ namespace DotNetNote.Apis.Controllers
                 if (DateTime.Now.Second % 2 == 0) //[!] 둘 중 원하는 방식 사용
                 {
                     // GetById 액션 이름 사용해서 입력된 데이터 반환 
-                    //return CreatedAtAction("GetById", new { id = m.Id }, m);
+                    //return CreatedAtAction("GetById", new { id = m.Id }, m); // Status: 201 Created
                     return CreatedAtRoute("GetById", new { id = m.Id }, m); // Status: 201 Created
                 }
                 else
@@ -96,6 +99,10 @@ namespace DotNetNote.Apis.Controllers
             }
         }
 
+        /// <summary>
+        /// https://localhost:44367/api/FiveService/1033
+        /// Put --> Body : {    "Id": 1033,    "Note": "수정 - 21년 8월 17일 복습입니다.( 6 )"}
+        /// </summary>
         [HttpPut("{id:int}")]   //HttpPatch=== 부분 업데이트
         public IActionResult Put(int id, [FromBody] FiveViewModel model) 
         {
@@ -142,9 +149,11 @@ namespace DotNetNote.Apis.Controllers
             }
         }
 
+        [HttpGet("page/{pageNumber=1}/{pageSize=10}")] //기본값
         [HttpGet("page/{pageNumber:int}/{pageSize:int}")]  // 이름추가 
         public IActionResult Get(int pageNumber=1, int pageSize = 10)
         {
+            //https://localhost:44367/api/FiveService/page/2/5
             try
             {
                 var fives = _repository.GetAllWithPaging(pageNumber-1, pageSize);
